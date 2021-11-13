@@ -1,0 +1,11 @@
+#!/bin/bash
+
+cd /app
+#python manage.py migrate --settings=easy_notice.settings.local
+#ps -ef | grep 'beat\|worker\|multiprocessing-fork\|flower' | grep -v grep | awk '{print "kill -9 "$2}'|sh
+nohup uvicorn easy_notice.config.asgi:application --host 0.0.0.0 --port 9000 2>&1 &
+bash compose/local/django/celery/worker/start
+bash compose/local/django/celery/beat/start
+bash compose/local/django/celery/flower/start
+#nohup python manage.py runserver 0.0.0.0:9000 --settings=easy_notice.settings.local --insecure 2>&1 &
+#docker run --name easy_notice -p 9000:9000 -it registry.cn-hangzhou.aliyuncs.com/dicardo/django-example:2021-07-04-20-38-29
