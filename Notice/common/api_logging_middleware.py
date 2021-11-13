@@ -5,6 +5,8 @@
 # @Software PyCharm
 
 from __future__ import unicode_literals
+
+import json
 import logging
 import time
 
@@ -16,13 +18,45 @@ class ApiLoggingMiddleware:
 
     def __call__(self, request):
         request.start_time = time.time()
-        body = str(request.body) + str(request.POST)
+        try:
+            body = json.loads(request.body)
+        except Exception:
+            body = str(request.body)
+
+        if request.Files:
+            body = 'body内容为文件'
+
+        post = str(request.POST)
+
         response = self.get_response(request)
         execute_time = round((time.time() - request.start_time) * 1000)
 
-        if request.method != 'GET':
-            self.api_logger.info(f'{request.user} {execute_time}ms {request.method} {request.path} {body} {response.status_code} {response.reason_phrase}')
+        try:
+            response_data = str(response.content, encoding='utf-8') if response.status_code != 500 else 'Please check error.log'
+        except Exception as e:
+            response_data = e
+
+        extra = {
+            'user': request.user.username if request.user.id else 'AnonymousUser',
+            'method': request.method,
+            'path': request.path,
+            'status_code': request.status_code,
+            'response_time': execute_time,
+            'response_body': response_data
+
+        }
+
+        if request.path in EXCLUDE_PATH:
+            self.api_logger.info(f'{request.user} {execute_time}ms {request.method} {request.path} {body} {post} {response.status_code} {response.reason_phrase}', extra=extra)
+
+        elif request.method != 'GET':
+            self.api_logger.info(f'{request.user} {execute_time}ms {request.method} {request.path} {body} {post} {response.status_code} {response.reason_phrase} {response_data}', extra=extra)
 
         else:
-            self.api_logger.info(f'{request.user} {execute_time}ms {request.method} {request.path} {response.status_code} {response.reason_phrase}')
+            self.api_logger.info(f'{request.user} {execute_time}ms {request.method} {request.path} {response.status_code} {response.reason_phrase}', extra=extra)
         return response
+
+
+EXCLUDE_PATH = [
+    '/metrics',
+]
