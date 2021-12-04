@@ -4,6 +4,6 @@
 # @File     __init__.py.py
 # @Software PyCharm
 
-from .celery_app import app as celery_app
+from easy_notice.config.celery.local import app as celery_app
 
 __all__ = ("celery_app",)
