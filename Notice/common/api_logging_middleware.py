@@ -40,7 +40,7 @@ class ApiLoggingMiddleware:
             'user': request.user.username if request.user.id else 'AnonymousUser',
             'method': request.method,
             'path': request.path,
-            'status_code': request.status_code,
+            'status_code': response.status_code,
             'response_time': execute_time,
             'response_body': response_data
 
