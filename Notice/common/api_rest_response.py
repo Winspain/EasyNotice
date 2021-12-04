@@ -24,6 +24,7 @@ class ApiRestResponse:
         return response_body
 
 
+@unique
 class ResponseEnum(Enum):
     SUCCESS = {'error_code': '000000', 'message': 'SUCCESS'}
     EXAMPLE_ENUM = {'error_code': '000001', 'message': 'ok'}

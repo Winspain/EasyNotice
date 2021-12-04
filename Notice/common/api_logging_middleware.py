@@ -23,7 +23,7 @@ class ApiLoggingMiddleware:
         except Exception:
             body = str(request.body)
 
-        if request.Files:
+        if request.FILES:
             body = 'body内容为文件'
 
         post = str(request.POST)
