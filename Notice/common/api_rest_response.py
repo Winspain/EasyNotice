@@ -17,13 +17,13 @@ class ApiRestResponse:
         """
         # 和web交互的信息使用驼峰命名,异常枚举是内部使用,因此采用Python推荐的蛇形命名法
         response_body = {
-            'errorCode': ExceptionEnum[enum].value['error_code'],
-            'message': ExceptionEnum[enum].value['message'] if not message else message,
+            'errorCode': enum.value['error_code'],
+            'message': enum.value['message'] if not message else message,
             'data': content,
         }
         return response_body
 
 
-class ExceptionEnum(Enum):
+class ResponseEnum(Enum):
     SUCCESS = {'error_code': '000000', 'message': 'SUCCESS'}
     EXAMPLE_ENUM = {'error_code': '000001', 'message': 'ok'}

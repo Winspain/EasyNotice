@@ -1,15 +1,15 @@
-from typing import Any
-
 from django.shortcuts import render
 
 # Create your views here.
+
+from typing import Any
 
 from rest_framework import generics, viewsets
 from rest_framework.request import Request
 from rest_framework.response import Response
 
 from apps.users import tasks
-from common.api_rest_response import ApiRestResponse
+from common.api_rest_response import ApiRestResponse, ResponseEnum
 
 
 class ExampleView(generics.ListAPIView, viewsets.GenericViewSet):
@@ -27,4 +27,4 @@ class ExampleView(generics.ListAPIView, viewsets.GenericViewSet):
         :return:
         """
         res = tasks.add.delay(1, 3)
-        return Response(data=ApiRestResponse().response(enum='SUCCESS', content=res.task_id))
+        return Response(data=ApiRestResponse().response(enum=ResponseEnum.SUCCESS, content=res.task_id))
