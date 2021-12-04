@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # @Time    : 2021/7/5 14:42
 # @Author  : dicardo
-# @File    : celery_app.py
+# @File    : local.py
 # @Software: PyCharm
 
 import os
