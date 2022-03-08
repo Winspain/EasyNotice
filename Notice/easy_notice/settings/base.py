@@ -162,7 +162,7 @@ LOGGING = {
     'disable_existing_loggers': False,
     'formatters': {
         'verbose': {
-            'format': '[{levelname}] {asctime} {funcName} {module} {filename} {message}',
+            'format': '[{levelname}] {asctime} {funcName} {module} {lineno} {filename} {message}',
             'style': '{',
         },
         'simple': {
@@ -216,7 +216,7 @@ LOGGING = {
 # Celery
 # ------------------------------------------------------------------------------
 # http://docs.celeryproject.org/en/latest/userguide/configuration.html#std:setting-broker_url
-CELERY_BROKER_URL = "redis://:atec%40123@47.96.117.252:6379/0"
+CELERY_BROKER_URL = "redis://"
 # http://docs.celeryproject.org/en/latest/userguide/configuration.html#std:setting-result_backend
 # CELERY_RESULT_BACKEND = CELERY_BROKER_URL
 CELERY_RESULT_BACKEND = 'django-db'
