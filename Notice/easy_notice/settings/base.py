@@ -87,7 +87,6 @@ MIDDLEWARE = [
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#root-urlconf
 ROOT_URLCONF = 'easy_notice.config.urls'
-WSGI_APPLICATION = 'easy_notice.config.wsgi.application'
 
 # TEMPLATES
 # ------------------------------------------------------------------------------
