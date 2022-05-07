@@ -7,6 +7,8 @@
 import multiprocessing
 from pathlib import Path
 
+from prometheus_client import multiprocess
+
 BASE_DIR = str(Path(__file__).resolve().parent.parent.parent.parent)
 bind = '0.0.0.0:8888'  # 绑定ip和端口号
 backlog = 512  # 监听队列
@@ -23,4 +25,4 @@ access_log_format = '%(t)s %(p)s %(h)s "%(r)s" %(s)s %(L)s %(b)s %(f)s" "%(a)s"'
 
 
 def child_exit(server, worker):
-    multiprocessing.mark_process_dead(worker.pid)
+    multiprocess.mark_process_dead(worker.pid)
