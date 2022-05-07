@@ -8,7 +8,7 @@ import multiprocessing
 from pathlib import Path
 
 BASE_DIR = str(Path(__file__).resolve().parent.parent.parent.parent)
-bind = '127.0.0.1:8888'  # 绑定ip和端口号
+bind = '0.0.0.0:8888'  # 绑定ip和端口号
 backlog = 512  # 监听队列
 chdir = BASE_DIR  # gunicorn要切换到的目的工作目录
 timeout = 30  # 超时

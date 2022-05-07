@@ -7,6 +7,7 @@
 from .base import *
 
 DEBUG = False
+WSGI_APPLICATION = 'easy_notice.config.wsgi.production.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
