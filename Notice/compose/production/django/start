@@ -1,9 +1,10 @@
 #!/bin/bash
 
-set -o errexit
-set -o pipefail
-set -o nounset
-
-
-python manage.py migrate
-uvicorn config.asgi:application --host 0.0.0.0 --reload
+export prometheus_multiproc_dir=logs/prometheus_multiproc
+#python3 -m pip install -r requirements/base.txt
+#python manage.py migrate --settings=easy_notice.settings.local
+#ps -ef | grep 'beat\|worker\|multiprocessing-fork\|flower' | grep -v grep | awk '{print "kill -9 "$2}'|sh
+#bash compose/local/django/celery/worker/start
+#bash compose/local/django/celery/beat/start
+#bash compose/local/django/celery/flower/start
+nohup gunicorn easy_notice.config.wsgi.production -c easy_notice/config/gunicorn/production 2>&1 &
