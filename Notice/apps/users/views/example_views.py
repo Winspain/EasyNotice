@@ -26,5 +26,5 @@ class ExampleView(generics.ListAPIView, viewsets.GenericViewSet):
         :param kwargs:
         :return:
         """
-        res = tasks.add.delay(1, 3)
-        return Response(data=ApiRestResponse().response(enum=ResponseEnum.SUCCESS, content=res.task_id))
+        # res = tasks.add.delay(1, 3)
+        return Response(data=ApiRestResponse().response(enum=ResponseEnum.SUCCESS))

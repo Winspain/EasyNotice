@@ -2,7 +2,7 @@
 
 export prometheus_multiproc_dir=logs/prometheus_multiproc
 #python3 -m pip install -r requirements/base.txt
-#python manage.py migrate --settings=easy_notice.settings.local
+python manage.py migrate --settings=easy_notice.settings.production
 #ps -ef | grep 'beat\|worker\|multiprocessing-fork\|flower' | grep -v grep | awk '{print "kill -9 "$2}'|sh
 #bash compose/local/django/celery/worker/start
 #bash compose/local/django/celery/beat/start
