@@ -18,7 +18,7 @@ class LotteryInfo(models.Model):
         db_table = 'lottery_info'
 
 
-class MyLottery(models.Model):
+class MyLotteryInfo(models.Model):
     selectNum = models.CharField(max_length=100, verbose_name='开奖结果')
     state = models.CharField(max_length=100)
     isDeleted = models.BooleanField()

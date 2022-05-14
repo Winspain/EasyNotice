@@ -11,12 +11,16 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 
 from common.api_rest_response import ApiRestResponse, ResponseEnum
+from lottery.models import MyLotteryInfo
+from lottery.serializers.lottery_serializer import LotterySerializer
 
 
 class MyLotteryView(generics.ListCreateAPIView, viewsets.GenericViewSet):
     """
     个人lottery号码管理
     """
+    queryset = MyLotteryInfo.objects.exclude(isDeleted=True)
+    serializer_class = LotterySerializer
 
     def list(self, request: Request, *args: Any, **kwargs: Any) -> object:
         """
@@ -30,8 +34,15 @@ class MyLotteryView(generics.ListCreateAPIView, viewsets.GenericViewSet):
         :return:
         :rtype:
         """
+        queryset = self.filter_queryset(self.get_queryset())
 
-        return Response(data=ApiRestResponse().response(enum=ResponseEnum.SUCCESS))
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(data=ApiRestResponse().response(enum=ResponseEnum.SUCCESS, content=serializer.data))
 
     def create(self, request: Request, *args: Any, **kwargs: Any) -> object:
         """
@@ -45,4 +56,7 @@ class MyLotteryView(generics.ListCreateAPIView, viewsets.GenericViewSet):
         :return:
         :rtype:
         """
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
         return Response(data=ApiRestResponse().response(enum=ResponseEnum.SUCCESS))
