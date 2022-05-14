@@ -6,7 +6,7 @@
 
 from rest_framework import serializers
 
-from apps.lottery.models import MyLotteryInfo
+from lottery.models import MyLotteryInfo
 
 
 class LotterySerializer(serializers.ModelSerializer):

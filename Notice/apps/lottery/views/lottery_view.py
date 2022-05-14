@@ -11,8 +11,8 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 
 from common.api_rest_response import ApiRestResponse, ResponseEnum
-from apps.lottery.models import MyLotteryInfo
-from apps.lottery.serializers.lottery_serializer import LotterySerializer
+from lottery.models import MyLotteryInfo
+from lottery.serializers.lottery_serializer import LotterySerializer
 
 
 class MyLotteryView(generics.ListCreateAPIView, viewsets.GenericViewSet):

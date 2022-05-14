@@ -8,8 +8,8 @@
 
 from rest_framework.routers import DefaultRouter
 
-from apps.lottery.views.lottery_view import MyLotteryView
-from apps.users.views.example_views import ExampleView
+from lottery.views.lottery_view import MyLotteryView
+from users.views.example_views import ExampleView
 
 router = DefaultRouter()
 urlpatterns = router.urls
